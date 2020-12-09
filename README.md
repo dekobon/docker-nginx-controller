@@ -23,6 +23,9 @@ With NGINX Controller, it is possible to collect and aggregate metrics across NG
 
 A small Python-based agent software NGINX Controller Agent should be installed inside the container alongside NGINX Plus to use NGINX Controller.
 
+For security protection of your web application, a web application firewall NGINX App Protect could be installed alongside NGINX Plus.
+The official documentation for NGINX App Protect is available [here](https://docs.nginx.com/nginx-app-protect/).  
+
 The official documentation for NGINX Controller is available [here](https://docs.nginx.com/nginx-controller/).
 
 Guidance around NGINX Plus is available [here](https://www.nginx.com/blog/deploying-nginx-nginx-plus-docker/).
@@ -83,7 +86,13 @@ git clone https://github.com/nginxinc/docker-nginx-controller.git
 ```
 
 ```bash
-cd docker-nginx-controller/<os>
+cd docker-nginx-controller/<os>/no-nap
+```
+
+If you want your Docker image to also include web application firewall (besides Controller Agent), then use Dockerfile with NGINX App Protect included:
+
+```bash
+cd docker-nginx-controller/<os>/nap
 ```
 
 Copy your NGINX Plus repository certificate and key to the cloned folder.  
@@ -168,6 +177,13 @@ nginx       11  0.0  0.3  31988  1968 ?        S    19:33   0:00 nginx: worker p
 nginx       65  0.6  9.1 111584 45884 ?        S    19:33   0:06 controller-agent
 ```
 
+If you are running NGINX Con container with NAP (NGINX App Protect) then you should also see NAP-specific processes:
+
+```bash
+nginx       10  0.0  2.5 129684 52320 ?        S    11:14   0:05 /usr/bin/perl /opt/app_protect/bin/bd_agent
+nginx       14  2.4 12.7 1057612 260260 ?      Sl   11:14   5:54 /usr/share/ts/bin/bd-socket-plugin tmm_count 4 proc_cpuinfo_cpu_m
+```
+
 If you see the **controller-agent** process, the setup went smoothly, and you should see the new container in the NGINX Controller interface after approximately one minute.
 
 To check the Controller Agent log:
@@ -242,6 +258,8 @@ A working alternative and `nginx-plus` example Dockerfiles can be found here:
 
 - debian/examples/
 - centos/examples/
+
+## 4. How to Build and Run an NGINX Controller-enabled NGINX image with NGINX App Protect
 
 ## Support
 

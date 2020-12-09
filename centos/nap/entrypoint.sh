@@ -48,9 +48,6 @@ test -n "${ENV_CONTROLLER_API_KEY}" && \
 test -n "${ENV_CONTROLLER_INSTANCE_NAME}" && \
     instance_name=${ENV_CONTROLLER_INSTANCE_NAME}
 
-test -n "${ENV_CONTROLLER_URL}" && \
-    controller_url=${ENV_CONTROLLER_URL}
-
 test -n "${ENV_CONTROLLER_LOCATION}" && \
     location=${ENV_CONTROLLER_LOCATION}
 

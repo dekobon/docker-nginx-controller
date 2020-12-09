@@ -50,9 +50,6 @@ test -n "${ENV_CONTROLLER_API_KEY}" && \
 test -n "${ENV_CONTROLLER_INSTANCE_NAME}" && \
     instance_name=${ENV_CONTROLLER_INSTANCE_NAME}
 
-test -n "${ENV_CONTROLLER_URL}" && \
-    controller_url=${ENV_CONTROLLER_URL}
-
 test -n "${ENV_CONTROLLER_LOCATION}" && \
     location=${ENV_CONTROLLER_LOCATION}
 
@@ -73,11 +70,6 @@ if [ -n "${api_key}" -o -n "${instance_name}" -o -n "${location}" ]; then
     test -n "${instance_name}" && \
     echo " ---> using instance_name = ${instance_name}" && \
     sh -c "sed -i.old -e 's/instance_name.*$/instance_name = $instance_name/' \
-	${agent_conf_file}"
-
-    test -n "${controller_url}" && \
-    echo " ---> using controller = ${controller_url}" && \
-    sh -c "sed -i.old -e 's@api_url.*@api_url = $controller_url@' \
 	${agent_conf_file}"
 
     test -n "${location}" && \
